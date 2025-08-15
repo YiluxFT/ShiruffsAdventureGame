@@ -1409,7 +1409,7 @@
             // Actualizar la UI de la sala con los datos iniciales
             currentRoomCodeDisplay.textContent = roomData.roomCode;
             aguilasRescatadasDisplay.textContent = roomData.aguilasRescatadas;
-            updatePlayersList(roomData.players);
+            updatePlayersList(roomData.players, roomData.hostId); // Pasa hostId aquí
 
             // Suscribirse a actualizaciones en tiempo real de esta sala
             const roomDocRef = doc(db, `artifacts/${appId}/public/data/gameRooms`, currentRoomId);
@@ -1417,7 +1417,7 @@
                 if (docSnap.exists()) {
                     const latestRoomData = docSnap.data();
                     aguilasRescatadasDisplay.textContent = latestRoomData.aguilasRescatadas;
-                    updatePlayersList(latestRoomData.players);
+                    updatePlayersList(latestRoomData.players, latestRoomData.hostId); // Pasa hostId aquí
                 } else {
                     // La sala ya no existe, el jugador es forzado a salir
                     currentRoomId = null;
@@ -1431,7 +1431,7 @@
         }
 
         // Función para actualizar la lista de jugadores en la UI
-        function updatePlayersList(players) {
+        function updatePlayersList(players, hostId) { // Recibe hostId como argumento
             playersList.innerHTML = ''; // Limpiar la lista actual
             if (players && players.length > 0) {
                 players.forEach(player => {
@@ -1440,16 +1440,10 @@
                     const dot = document.createElement('span');
                     dot.classList.add('player-status-dot');
                     li.appendChild(dot);
-                    // Acceder a la información del host de la sala desde el doc actual del listener
+                    
                     let hostText = '';
-                    if (currentRoomId && db) { // Asegúrate de que currentRoomId y db existan
-                        // Esto es solo una aproximación. Para determinar el anfitrión de forma más robusta,
-                        // la `roomData` pasada a `enterRoomView` debería tener `hostId`.
-                        // En el listener onSnapshot, `latestRoomData` tendría el hostId.
-                        // Simplificamos aquí basándonos en el currentRoomId global y asumiendo que el doc tiene hostId.
-                        if (latestRoomData && latestRoomData.hostId === player.id) {
-                            hostText = '(Anfitrión)';
-                        }
+                    if (player.id === hostId) { // Usa directamente el hostId pasado
+                        hostText = '(Anfitrión)';
                     }
                     li.innerHTML += `${player.username} ${player.id === currentUserId ? '(Tú)' : ''} ${hostText}`;
                     playersList.appendChild(li);
