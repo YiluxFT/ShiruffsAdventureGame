@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Shiruffs Adventure - Menú Principal y Tienda</title>
+    <!-- Favicon de la página -->
+    <link rel="icon" type="image/png" href="https://i.imgur.com/TN2qxJ8.png">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -882,6 +884,156 @@
             font-size: 1.1em; /* Fuente ligeramente más pequeña que el JUGAR principal */
         }
 
+        /* Estilos para el contenedor del mapa de historia */
+        .history-map-container {
+            position: relative;
+            width: 95%; /* Más ancho para el mapa */
+            max-width: 960px; /* Tamaño más grande para el mapa */
+            height: 80vh; /* Más alto para el mapa */
+            max-height: 720px;
+            background-color: #2a2a2a;
+            border: 5px solid #8B4513;
+            border-radius: 8px;
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centra el contenido verticalmente */
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: 'Press Start 2P', cursive;
+            color: #eceff1;
+            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.7);
+            gap: 20px; /* Espacio entre el título, imagen y botón */
+        }
+
+        .map-header {
+            font-size: 2.2em;
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 0; /* Ajuste el margen ya que hay un gap */
+        }
+
+        .map-image {
+            width: 95%; /* La imagen ocupa casi todo el ancho del contenedor */
+            max-width: 780px; /* Limita el tamaño máximo para que no sea excesivamente grande */
+            height: auto;
+            object-fit: contain;
+            image-rendering: pixelated; /* Crucial para el estilo pixel art */
+            border: 2px solid #5A2D0D;
+            border-radius: 4px;
+            background-color: #1a1a1a;
+            padding: 5px;
+            flex-grow: 1; /* Permite que la imagen crezca para ocupar espacio */
+        }
+
+        /* Estilos para el contenedor principal de Logros */
+        .achievements-container {
+            position: relative;
+            width: 90%; /* Ancho responsivo */
+            max-width: 800px; /* Ancho máximo */
+            height: 70vh; /* Altura responsiva */
+            max-height: 600px; /* Altura máxima */
+            background-color: #2a2a2a;
+            border: 5px solid #8B4513;
+            border-radius: 8px;
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: 'Press Start 2P', cursive;
+            color: #eceff1;
+            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.7);
+            gap: 20px;
+        }
+
+        .achievements-header {
+            font-size: 2em;
+            color: #FFD700;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Columnas responsivas */
+            gap: 20px;
+            width: 100%;
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+        }
+
+        .achievement-card {
+            background-color: #3f3f3f;
+            border: 2px solid #5A2D0D;
+            border-radius: 4px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            text-align: center;
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+            cursor: pointer; /* Hace que la tarjeta sea clicable para simular progreso */
+            transition: transform 0.1s ease-out;
+        }
+
+        .achievement-card.completed {
+            background-color: #2e4d2e; /* Fondo más oscuro para logros completados */
+            border-color: #4CAF50; /* Borde verde para logros completados */
+            opacity: 0.7; /* Ligeramente opaco cuando completado */
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .achievement-card:active {
+            transform: translateY(1px);
+        }
+
+        .achievement-icon {
+            width: 80px; /* Tamaño del icono del logro */
+            height: 80px;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+        
+        /* Estilo específico para iconos de logros míticos */
+        .achievement-icon.mythical {
+            border: 2px solid #FFD700; /* Borde dorado para logros míticos */
+            box-shadow: 0px 0px 8px #FFD700; /* Resplandor dorado */
+        }
+
+        .achievement-name {
+            font-size: 0.8em;
+            color: #fff;
+        }
+
+        .achievement-description {
+            font-family: 'Inter', sans-serif; /* Fuente más legible para descripción */
+            font-size: 0.7em;
+            color: #ccc;
+        }
+
+        .achievement-status {
+            font-size: 0.7em;
+            color: #FF4500; /* Rojo para no completado */
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .achievement-status.completed {
+            color: #4CAF50; /* Verde para completado */
+        }
+
+
     </style>
 </head>
 <body>
@@ -1088,6 +1240,22 @@
         <button id="backToMainMenuFromGameModes" class="back-button">Volver al Menú</button>
     </div>
 
+    <!-- Contenedor para el mapa de historia (NUEVO) -->
+    <div id="historyMapContainer" class="hidden history-map-container">
+        <h2 class="map-header">MAPA DE AVENTURA</h2>
+        <img src="https://i.imgur.com/19518e.png" onerror="this.onerror=null;this.src='https://placehold.co/800x600/000000/FFFFFF?text=MAPA+DE+AVENTURA';" alt="Mapa Pixel Art" class="map-image">
+        <button id="backToGameModesFromMapButton" class="back-button">Volver a Selección de Modo</button>
+    </div>
+
+    <!-- Contenedor para los logros (NUEVO) -->
+    <div id="achievementsContainer" class="hidden achievements-container">
+        <h2 class="achievements-header">LOGROS</h2>
+        <div class="achievements-grid" id="achievementsGrid">
+            <!-- Los logros se insertarán aquí dinámicamente -->
+        </div>
+        <button id="backToMainMenuFromAchievements" class="back-button">Volver al Menú</button>
+    </div>
+
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -1125,6 +1293,8 @@
         const authContainer = document.getElementById('authContainer');
         const multiplayerContainer = document.getElementById('multiplayerContainer'); // Nuevo contenedor multijugador
         const gameModeSelectionContainer = document.getElementById('gameModeSelectionContainer'); // Nuevo contenedor para selección de modo de juego
+        const historyMapContainer = document.getElementById('historyMapContainer'); // Contenedor del mapa de historia
+        const achievementsContainer = document.getElementById('achievementsContainer'); // NUEVO: Contenedor de logros
 
         const authChoiceScreen = document.getElementById('authChoiceScreen');
         const registerScreen = document.getElementById('registerScreen');
@@ -1146,13 +1316,32 @@
         const aguilasRescatadasDisplay = document.getElementById('aguilasRescatadasDisplay');
         const playersList = document.getElementById('playersList');
 
+        // Referencias para los nuevos botones del mapa de historia y logros
+        const backToGameModesFromMapButton = document.getElementById('backToGameModesFromMapButton');
+        const achievementsGrid = document.getElementById('achievementsGrid'); // Grid para insertar logros
+        const backToMainMenuFromAchievementsButton = document.getElementById('backToMainMenuFromAchievements'); // Botón de volver desde logros
+
+        // Datos de los logros
+        const achievementsData = [
+            { id: 'collect100G', name: 'Riqueza Inicial', description: 'Recolecta 100G (Monedas)', icon: 'https://i.imgur.com/W3lW38R.png', type: 'normal', completed: false },
+            { id: 'getAllWeapons', name: 'Arsenal Completo', description: 'Obtén todas las armas', icon: 'https://i.imgur.com/W3lW38R.png', type: 'normal', completed: false },
+            { id: 'kill1Soldier', name: 'Primer Caído', description: 'Mata a 1 soldado', icon: 'https://i.imgur.com/W3lW38R.png', type: 'normal', completed: false },
+            { id: 'kill10Soldiers', name: 'Carnicería Menor', description: 'Mata 10 soldados', icon: 'https://i.imgur.com/W3lW38R.png', type: 'normal', completed: false },
+            { id: 'defeat1Boss', name: 'Verdugo de Jefes', description: 'Derrota un jefe', icon: 'https://i.imgur.com/W3lW38R.png', type: 'normal', completed: false },
+            { id: 'kill100Enemies', name: 'Matanza Masiva', description: 'Mata 100 enemigos', icon: 'https://i.imgur.com/Au9wUee.png', type: 'mythical', completed: false },
+            { id: 'get1000G', name: 'Fortuna Infinita', description: 'Consigue 1000 monedas', icon: 'https://i.imgur.com/Au9wUee.png', type: 'mythical', completed: false }
+        ];
+
+
         // Función para ocultar todas las pantallas
         function hideAllScreens() {
             mainMenuContainer.classList.add('hidden');
             shopContainer.classList.add('hidden');
             authContainer.classList.add('hidden');
             multiplayerContainer.classList.add('hidden');
-            gameModeSelectionContainer.classList.add('hidden'); // Ocultar también la selección de modo de juego
+            gameModeSelectionContainer.classList.add('hidden');
+            historyMapContainer.classList.add('hidden');
+            achievementsContainer.classList.add('hidden'); // Ocultar también el contenedor de logros
             authChoiceScreen.classList.add('hidden');
             registerScreen.classList.add('hidden');
             loginScreen.classList.add('hidden');
@@ -1218,6 +1407,51 @@
             hideAllScreens();
             gameModeSelectionContainer.classList.remove('hidden');
         }
+
+        // Función para mostrar el mapa de historia
+        function showHistoryMap() {
+            hideAllScreens();
+            historyMapContainer.classList.remove('hidden');
+        }
+
+        // NUEVO: Función para mostrar la pantalla de logros
+        function showAchievements() {
+            hideAllScreens();
+            achievementsContainer.classList.remove('hidden');
+            renderAchievements(); // Llama a la función para renderizar los logros
+        }
+
+        // Función para renderizar los logros en la cuadrícula
+        function renderAchievements() {
+            achievementsGrid.innerHTML = ''; // Limpiar la cuadrícula existente
+            achievementsData.forEach(achievement => {
+                const card = document.createElement('div');
+                card.classList.add('achievement-card');
+                card.dataset.id = achievement.id; // Guarda el ID para fácil referencia
+
+                if (achievement.completed) {
+                    card.classList.add('completed');
+                }
+
+                card.innerHTML = `
+                    <img src="${achievement.icon}" onerror="this.onerror=null;this.src='https://placehold.co/80x80/3f3f3f/FFFFFF?text=?'" alt="${achievement.name} Icono" class="achievement-icon ${achievement.type === 'mythical' ? 'mythical' : ''}">
+                    <span class="achievement-name">${achievement.name.toUpperCase()}</span>
+                    <span class="achievement-description">${achievement.description}</span>
+                    <span class="achievement-status ${achievement.completed ? 'completed' : ''}">
+                        ${achievement.completed ? 'COMPLETADO' : 'PENDIENTE'}
+                    </span>
+                `;
+
+                // Añadir evento para simular completado/pendiente
+                card.addEventListener('click', () => {
+                    achievement.completed = !achievement.completed; // Alternar estado
+                    renderAchievements(); // Volver a renderizar para actualizar la UI
+                });
+
+                achievementsGrid.appendChild(card);
+            });
+        }
+
 
         // Listener para los cambios de estado de autenticación de Firebase
         onAuthStateChanged(auth, async (user) => {
@@ -1466,9 +1700,7 @@
         // Estos listeners se movieron a la nueva pantalla de selección de modo
         document.getElementById('gameModeSelectionContainer').querySelector('#historiaButton').addEventListener('click', function() {
             console.log('¡Botón "Historia" clickeado!');
-            // Aquí puedes añadir la lógica para iniciar el modo historia
-            multiplayerMessage.textContent = "Modo Historia en construcción...";
-            setTimeout(() => multiplayerMessage.textContent = '', 2000);
+            showHistoryMap(); // Llama a la nueva función para mostrar el mapa
         });
 
         document.getElementById('gameModeSelectionContainer').querySelector('#batallaButton').addEventListener('click', function() {
@@ -1514,8 +1746,7 @@
 
         document.getElementById('logrosButton').addEventListener('click', function() {
             console.log('¡Botón "LOGROS" clickeado!');
-            multiplayerMessage.textContent = "Funcionalidad de Logros en construcción..."; // Temporalmente muestra mensaje aquí
-            setTimeout(() => multiplayerMessage.textContent = '', 2000);
+            showAchievements(); // Llama a la nueva función para mostrar los logros
         });
 
         // Nuevo event listener para el botón "Próximamente..."
@@ -1530,6 +1761,14 @@
         document.getElementById('backToMenuFromAuthChoices').addEventListener('click', showMainMenu);
         document.getElementById('backToMainMenuFromMultiplayer').addEventListener('click', showMainMenu); // Nuevo botón de volver en multijugador
         document.getElementById('backToMainMenuFromGameModes').addEventListener('click', showMainMenu); // Nuevo botón de volver desde selección de modo de juego
+        document.getElementById('backToMainMenuFromAchievements').addEventListener('click', showMainMenu); // NUEVO: Botón de volver desde logros
+
+        // Event listener para el botón de volver desde el mapa de historia
+        backToGameModesFromMapButton.addEventListener('click', function() {
+            console.log('Volver a Selección de Modo clickeado desde el mapa.');
+            showGameModeSelection(); // Vuelve a la pantalla de selección de modo de juego
+        });
+
 
         document.getElementById('backToAuthChoicesFromRegister').addEventListener('click', showAuthChoiceScreen);
         document.getElementById('submitRegisterButton').addEventListener('click', async () => {
